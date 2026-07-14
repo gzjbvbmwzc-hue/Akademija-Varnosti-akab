@@ -203,15 +203,6 @@
 
   .mini-gallery-1{grid-template-columns:repeat(5,1fr);max-width:620px;}
 
-  .teaser-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .teaser-card{display:block;background:var(--bg-alt);padding:28px 24px;text-decoration:none;transition:background .2s;}
-  .teaser-card:hover{background:var(--card);}
-  .teaser-card .code{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--red);letter-spacing:0.08em;}
-  .teaser-card h3{font-size:21px;margin:12px 0 8px;color:var(--paper);}
-  .teaser-card p{font-size:13.5px;color:var(--muted);margin:0 0 14px;}
-  .teaser-cta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);text-transform:uppercase;letter-spacing:0.05em;}
-  @media (max-width:900px){ .teaser-grid{grid-template-columns:1fr;} }
-
   @media (max-width:900px){
     .about-grid, .fitness, .contact-grid{grid-template-columns:1fr;}
     .aud-grid{grid-template-columns:1fr 1fr;}
@@ -245,94 +236,42 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap hero-content">
-    <div class="hero-text-panel">
-      <div class="eyebrow">Akademija varnosti · Aleš Boncelj s.p.</div>
-      <h1>PREPOZNAJ.<br>UKREPAJ.<br><span class="r">PREŽIVI.</span></h1>
-      <p class="lead">Edinstven program usposabljanj za osebno in kolektivno varnost, amok dogodke, samoobrambo, prvo pomoč in taktično ukrepanje — zgrajen na 33 letih policijskih izkušenj in 25 letih instruktorskega dela. Znanje, ki v kritičnem trenutku dejansko šteje. Od varnostnih usposabljanj do osebnega treninga — celostna skrb za tvojo pripravljenost, telo in um, kakršne v Sloveniji ne najdeš nikjer drugje.</p>
-      <div class="hero-ctas">
-        <a href="kontakt.html" class="cta-btn">Naročite usposabljanje</a>
-        <a href="storitve.html" class="cta-btn ghost">Poglejte storitve</a>
-      </div>
-      <div class="motto-strip">
-        <span><b>33</b> let v policiji</span>
-        <span><b>25</b> let inštruktor samoobrambe in streljanja</span>
-        <span><b>1</b> specializacija — amok dogodki</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="zakaj-zdaj" class="why-now">
+<div class="wrap" style="padding-top:18px;">
+  <a href="index.html" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.05em;">← Nazaj na domačo stran</a>
+</div>
+<section id="kvizi">
   <div class="wrap">
     <div class="section-head">
-      <div><span class="tag">Zakaj zdaj</span><h2>Nevarnost redko pride brez opozorila</h2></div>
-      <div class="meta">Prepoznava je prva in najpomembnejša linija preventive.</div>
+      <div><span class="tag">Preveri znanje</span><h2>Kvizi</h2></div>
+      <div class="meta">Kratki plačljivi kvizi za utrjevanje znanja s področja varnosti.</div>
     </div>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="why-num">01</div>
-        <h3>Konflikti naraščajo</h3>
-        <p>Agresivno vedenje na delovnem mestu, v šolah, zdravstvu in javnih ustanovah ni več izjema — je vsakodnevna realnost, na katero morajo biti pripravljeni tako posamezniki kot celotne institucije.</p>
+    <div class="quiz-grid">
+      <a href="kviz-amok.html" class="quiz-card reveal">
+        <div class="quiz-card-top">
+          <span class="code">KVIZ // AMOK DOGODKI</span>
+          <span class="quiz-price">4,90 €</span>
+        </div>
+        <h3>Prepoznaj. Ukrepaj. Preživi.</h3>
+        <p>12 vprašanj o prepoznavanju amok situacij, protokolu odziva in sodelovanju s policijo — s takojšnjo razlago vsakega odgovora.</p>
+        <span class="quiz-cta">Reši kviz →</span>
+      </a>
+      <a href="kviz-osebni-prostor.html" class="quiz-card reveal">
+        <div class="quiz-card-top">
+          <span class="code">KVIZ // OSEBNI PROSTOR</span>
+          <span class="quiz-price">4,99 €</span>
+        </div>
+        <h3>Zaščita osebnega prostora</h3>
+        <p>20 vprašanj o mejah osebnega prostora, silobranu in sorazmerni samoobrambi po slovenski zakonodaji.</p>
+        <span class="quiz-cta">Reši kviz →</span>
+      </a>
+      <div class="quiz-card quiz-card-soon">
+        <div class="quiz-card-top">
+          <span class="code">KVIZ // SAMOOBRAMBA</span>
+          <span class="quiz-price">kmalu</span>
+        </div>
+        <h3>V pripravi</h3>
+        <p>Nov kviz s področja realne samoobrambe in prve pomoči je v pripravi.</p>
       </div>
-      <div class="why-card reveal">
-        <div class="why-num">02</div>
-        <h3>Znaki so vidni prej</h3>
-        <p>Telesna govorica, mimika obraza in vedenjske spremembe so zgodnji signali, ki pogosto izdajo namero, preden pride do dejanja — če jih znaš prepoznati.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-num">03</div>
-        <h3>Prepoznava rešuje</h3>
-        <p>Zaposleni, učitelji in uslužbenci, usposobljeni za zgodnje prepoznavanje nevarne osebe, lahko preprečijo eskalacijo, še preden je potrebna intervencija.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="pregled" style="background:var(--bg-alt);">
-  <div class="wrap">
-    <div class="section-head">
-      <div><span class="tag">Raziskuj</span><h2>Kaj najdeš na strani</h2></div>
-      <div class="meta">Izberi razdelek, ki te zanima.</div>
-    </div>
-    <div class="teaser-grid">
-      <a href="o-meni.html" class="teaser-card reveal">
-        <span class="code">01 // O MENI</span>
-        <h3>Aleš Boncelj</h3>
-        <p>33 let policije, 25 let inštruktorskega dela — spoznaj zgodbo za Akademijo varnosti.</p>
-        <span class="teaser-cta">Preberi več →</span>
-      </a>
-      <a href="storitve.html" class="teaser-card reveal">
-        <span class="code">02 // STORITVE</span>
-        <h3>Šest področij usposabljanj</h3>
-        <p>Od amok dogodkov in samoobrambe do dela z varnostnimi organi in osebnega trenerstva.</p>
-        <span class="teaser-cta">Poglej storitve →</span>
-      </a>
-      <a href="za-koga.html" class="teaser-card reveal">
-        <span class="code">03 // ZA KOGA</span>
-        <h3>Naročniki</h3>
-        <p>Od vrtcev in šol do bank, sodišč in zasebnih podjetij.</p>
-        <span class="teaser-cta">Poglej seznam →</span>
-      </a>
-      <a href="gradiva.html" class="teaser-card reveal">
-        <span class="code">04 // GRADIVA</span>
-        <h3>Protokoli in tehnike</h3>
-        <p>Kratki izvlečki iz usposabljanj — za osnovno pripravljenost.</p>
-        <span class="teaser-cta">Poglej gradiva →</span>
-      </a>
-      <a href="kvizi.html" class="teaser-card reveal">
-        <span class="code">05 // KVIZI</span>
-        <h3>Preveri znanje</h3>
-        <p>Kratki plačljivi kvizi za utrjevanje znanja s področja varnosti.</p>
-        <span class="teaser-cta">Reši kviz →</span>
-      </a>
-      <a href="kontakt.html" class="teaser-card reveal">
-        <span class="code">06 // KONTAKT</span>
-        <h3>Naročite usposabljanje</h3>
-        <p>Odgovorim osebno, praviloma v 1–2 dneh.</p>
-        <span class="teaser-cta">Kontaktiraj →</span>
-      </a>
     </div>
   </div>
 </section>
