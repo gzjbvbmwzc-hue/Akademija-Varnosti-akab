@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kviz: Osnove osebne varnosti</title>
+<style>
+  :root{
+    --bg:#120707;
+    --bg2:#1c0d0d;
+    --crimson:#8a1224;
+    --crimson-bright:#c81e34;
+    --gold:#c9a24b;
+    --gold-soft:#e4c877;
+    --text:#f2e9e1;
+    --text-dim:#c9b8ac;
+    --card:#1a0d0d;
+    --border:#3a1b1b;
+    --good:#5a9a5a;
+    --bad:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Georgia', 'Times New Roman', serif;
+    background:
+      radial-gradient(ellipse at top, #250f0f 0%, var(--bg) 55%),
+      var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    padding:40px 16px 80px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+  header{
+    text-align:center;
+    margin-bottom:36px;
+    padding-bottom:24px;
+    border-bottom:1px solid var(--border);
+  }
+  .eyebrow{
+    font-family:'Trebuchet MS', sans-serif;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,40px);
+    margin:0 0 10px;
+    color:var(--gold-soft);
+    font-weight:700;
+    letter-spacing:.01em;
+  }
+  .sub{
+    color:var(--text-dim);
+    font-size:15px;
+    font-family:'Trebuchet MS', sans-serif;
+    max-width:520px;
+    margin:0 auto;
+    line-height:1.5;
+  }
+  .progress-track{
+    position:sticky;
+    top:0;
+    z-index:5;
+    height:4px;
+    background:var(--border);
+    margin-bottom:30px;
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--crimson),var(--gold));
+    transition:width .3s ease;
+  }
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:3px solid var(--crimson-bright);
+    border-radius:6px;
+    padding:24px 24px 20px;
+    margin-bottom:18px;
+  }
+  .q-num{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:12px;
+    letter-spacing:.15em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .q-text{
+    font-size:18px;
+    line-height:1.45;
+    margin-bottom:16px;
+    color:var(--text);
+  }
+  .opts{display:flex;flex-direction:column;gap:9px;}
+  .opt{
+    display:flex;
+    align-items:flex-start;
+    gap:11px;
+    padding:11px 14px;
+    border:1px solid var(--border);
+    border-radius:5px;
+    cursor:pointer;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:15px;
+    line-height:1.4;
+    color:var(--text-dim);
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .opt:hover{border-color:var(--gold);color:var(--text);}
+  .opt input{accent-color:var(--gold);margin-top:3px;flex-shrink:0;}
+  .opt.selected{
+    border-color:var(--gold);
+    background:rgba(201,162,75,.08);
+    color:var(--text);
+  }
+  .section-tag{
+    display:inline-block;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--bg);
+    background:var(--gold);
+    padding:3px 9px;
+    border-radius:3px;
+    margin-bottom:10px;
+  }
+  .submit-zone{
+    text-align:center;
+    margin-top:36px;
+  }
+  #submitBtn{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:15px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--bg);
+    background:linear-gradient(180deg,var(--gold-soft),var(--gold));
+    border:none;
+    padding:15px 44px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:700;
+    box-shadow:0 4px 14px rgba(0,0,0,.4);
+    transition:transform .15s, box-shadow .15s;
+  }
+  #submitBtn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.5);}
+  #submitBtn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+  .hint{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:12.5px;
+    color:var(--text-dim);
+    margin-top:10px;
+  }
+  #result{
+    display:none;
+    text-align:center;
+    background:var(--card);
+    border:1px solid var(--gold);
+    border-radius:8px;
+    padding:40px 28px;
+    margin-top:10px;
+  }
+  #result .score-num{
+    font-size:64px;
+    color:var(--gold-soft);
+    font-weight:700;
+    line-height:1;
+    margin-bottom:6px;
+  }
+  #result .score-den{
+    font-family:'Trebuchet MS', sans-serif;
+    color:var(--text-dim);
+    font-size:14px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  #result .badge{
+    display:inline-block;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:13px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    padding:8px 20px;
+    border-radius:20px;
+    margin-bottom:16px;
+  }
+  #result .badge.b1{background:rgba(192,57,43,.18);color:#e07a6c;border:1px solid #7a2b22;}
+  #result .badge.b2{background:rgba(201,162,75,.15);color:var(--gold-soft);border:1px solid var(--gold);}
+  #result .badge.b3{background:rgba(90,154,90,.15);color:#8fc98f;border:1px solid #3f6b3f;}
+  #result .badge.b4{background:rgba(90,154,90,.22);color:#a8e0a8;border:1px solid #4f8a4f;}
+  #result p.msg{
+    font-size:16px;
+    color:var(--text);
+    max-width:440px;
+    margin:0 auto 26px;
+    line-height:1.55;
+  }
+  #retryBtn{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    background:transparent;
+    border:1px solid var(--gold);
+    padding:10px 26px;
+    border-radius:5px;
+    cursor:pointer;
+  }
+  #retryBtn:hover{background:rgba(201,162,75,.1);}
+  .unanswered-warn{
+    color:#e07a6c;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:13px;
+    margin-top:12px;
+    display:none;
+  }
+  footer{
+    text-align:center;
+    margin-top:44px;
+    color:var(--text-dim);
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:12px;
+    letter-spacing:.04em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">AKAB &middot; Akademija varnosti Aleš Boncelj</div>
+    <h1>Kviz: Osnove osebne varnosti</h1>
+    <p class="sub">15 vprašanj o samoobrambi, prepoznavanju nevarnosti, prvi pomoči in pravici do silobrana. Brezplačno preveri, kako osveščen/-a si.</p>
+  </header>
+
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <form id="quizForm"></form>
+
+  <div class="submit-zone">
+    <button id="submitBtn" type="button" disabled>Preveri rezultat</button>
+    <div class="hint" id="hintText">Odgovori na vsa vprašanja, da preveriš rezultat.</div>
+    <div class="unanswered-warn" id="warnText">Prosimo, odgovori še na vsa vprašanja preden oddaš kviz.</div>
+  </div>
+
+  <div id="result">
+    <div class="score-num" id="scoreNum">0/15</div>
+    <div class="score-den">pravilnih odgovorov</div>
+    <div class="badge" id="scoreBadge">Ocena</div>
+    <p class="msg" id="scoreMsg"></p>
+    <button id="retryBtn" type="button">Poskusi znova</button>
+  </div>
+
+  <footer>© AKAB &mdash; Akademija varnosti Aleš Boncelj s.p.</footer>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    tag: "Situacijsko zavedanje",
+    q: "Katero je prvo in temeljno pravilo osebne varnosti, ki velja v vsakem trenutku?",
+    opts: [
+      "Vedno nositi kakšno orožje s seboj",
+      "Biti pozoren na okolico in opazovati, kaj se dogaja okoli sebe",
+      "Hoditi čim hitreje, ne glede na smer",
+      "Izogibati se popolnoma vsem ljudem"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Situacijsko zavedanje",
+    q: "Kaj je priporočljivo, če ste ponoči sami na neznanem ali nevarnem mestu?",
+    opts: [
+      "Poslušati glasbo prek slušalk, da se sprostite",
+      "Ves čas gledati v telefon zaradi orientacije",
+      "Opazovati dogajanje spredaj, zadaj in ob straneh ter, če je mogoče, hoditi v skupini",
+      "Teči, ne glede na okolico"
+    ],
+    correct: 2
+  },
+  {
+    tag: "Prva pomoč",
+    q: "Kaj je prvi korak pri nudenju prve pomoči poškodovani osebi po napadu?",
+    opts: [
+      "Osebo takoj premakniti na drugo mesto",
+      "Preveriti odzivnost in dihanje ter poklicati 112",
+      "Ji dati hrano in vodo, da se pomiri",
+      "Počakati, da se stanje samo uredi"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Prva pomoč",
+    q: "Kako pravilno ukrepamo ob močnejši zunanji krvavitvi?",
+    opts: [
+      "Z neposrednim pritiskom na rano s čisto tkanino ali oblogo",
+      "Z dvigom nasprotne okončine nad glavo",
+      "Z rahlim masiranjem okolice rane",
+      "Počakamo, da krvavitev sama preneha"
+    ],
+    correct: 0
+  },
+  {
+    tag: "Pravni vidik",
+    q: "Kaj po zakonu pomeni silobran?",
+    opts: [
+      "Vsak napad na drugo osebo",
+      "Vnaprej načrtovano maščevanje napadalcu",
+      "Obrambo, ki je nujno potrebna, da odvrnemo sočasen protipraven napad nase ali na koga drugega",
+      "Kakršenkoli fizični obračun po prepiru"
+    ],
+    correct: 2
+  },
+  {
+    tag: "Pravni vidik",
+    q: "Kaj velja, če nekdo prekorači meje silobrana zaradi močne razdraženosti ali prestrašenosti, ki jo je povzročil napad?",
+    opts: [
+      "Vedno je v celoti kazensko odgovoren",
+      "Kazen se mu sme omiliti ali celo odpustiti",
+      "Zakon takšnih primerov ne obravnava",
+      "Avtomatsko je oproščen brez vsakršne presoje"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Samoobramba",
+    q: "Kaj se v telesu napadene osebe najprej sproži kot odziv na napad?",
+    opts: [
+      "Utrujenost",
+      "Strah",
+      "Lakota",
+      "Zaspanost"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Samoobramba",
+    q: "Katere so tiste kritične točke na telesu, ki jih pravila samoobrambe izpostavljajo kot najučinkovitejše za onesposobitev napadalca?",
+    opts: [
+      "Rame, hrbet, kolki",
+      "Nos, oči, grlo, genitalije",
+      "Dlani, stopala, komolci",
+      "Lasišče, ušesa, vrat od zadaj"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Samoobramba",
+    q: "Kdaj pravila svetujejo, da napadete prvi?",
+    opts: [
+      "Vedno, ob vsakem manjšem sporu",
+      "Nikoli, ne glede na okoliščine",
+      "Le kot skrajna možnost, ko ste 100 % prepričani, da bo do napada prišlo in je vaše življenje ogroženo",
+      "Samo, če imate pri sebi orožje"
+    ],
+    correct: 2
+  },
+  {
+    tag: "Samoobramba",
+    q: "Kako naj bi bil videti učinkovit obrambni napad, če do njega res mora priti?",
+    opts: [
+      "Počasen in previden, en sam udarec",
+      "Hiter, presenetljiv in močan – en udarec ali več, odvisno od okoliščin",
+      "Dolgotrajen spopad, dokler se eden od vpletenih ne utrudi",
+      "Predvsem glasen, brez fizičnega dela"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Samoobramba",
+    q: "Kaj naredimo takoj, ko napadalca onesposobimo?",
+    opts: [
+      "Počakamo, da se pobere, in preverimo njegovo stanje",
+      "Ostanemo na mestu in razmislimo o naslednjih korakih",
+      "Zbežimo na varno mesto in pokličemo pomoč",
+      "Ponovno preverimo, ali je res onesposobljen, tako da ga nagovorimo"
+    ],
+    correct: 2
+  },
+  {
+    tag: "Samoobramba",
+    q: "Kaj lahko poleg fizičnega odziva pomaga povzročiti senzorično preobremenitev napadalca in opozoriti okolico?",
+    opts: [
+      "Tiho umikanje",
+      "Glasno kričanje",
+      "Zapiranje oči",
+      "Molk in mirovanje"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Osebno okolje",
+    q: "Kaj svetuje pravilo o gibanju po senčnih ali kriminalno bolj izpostavljenih delih mesta?",
+    opts: [
+      "Vzdrževati stalen očesni stik z vsakim mimoidočim",
+      "Hoditi samozavestno, s pokončno držo, in se izogibati dolgemu očesnemu stiku",
+      "Hoditi počasi in gledati v tla",
+      "Vprašati mimoidoče za pomoč pri vsakem koraku"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Osebno okolje",
+    q: "Kaj je priporočeno ravnanje, če vam napadalec zahteva denarnico ali drugo premoženje?",
+    opts: [
+      "Braniti premoženje za vsako ceno",
+      "Preprosto mu ga dati, saj noben denar ni vreden toliko kot življenje",
+      "Poskušati se pogajati o delu zneska",
+      "Takoj preiti v fizični spopad"
+    ],
+    correct: 1
+  },
+  {
+    tag: "Strah in psihologija",
+    q: "Kakšna je osnovna vloga strahu kot čustva pri soočanju z nevarnostjo?",
+    opts: [
+      "Je izključno škodljiv in ga je treba popolnoma odpraviti",
+      "Služi zaščiti in preživetju ter vodi v odziv boja ali bega",
+      "Nima nobene funkcije, je le moteč občutek",
+      "Pojavi se šele po koncu nevarne situacije"
+    ],
+    correct: 1
+  }
+];
+
+const form = document.getElementById('quizForm');
+const submitBtn = document.getElementById('submitBtn');
+const progressFill = document.getElementById('progressFill');
+const answers = new Array(QUESTIONS.length).fill(null);
+
+QUESTIONS.forEach((item, qi) => {
+  const card = document.createElement('div');
+  card.className = 'q-card';
+
+  const tag = document.createElement('div');
+  tag.className = 'section-tag';
+  tag.textContent = item.tag;
+  card.appendChild(tag);
+
+  const num = document.createElement('div');
+  num.className = 'q-num';
+  num.textContent = 'Vprašanje ' + (qi + 1) + ' / ' + QUESTIONS.length;
+  card.appendChild(num);
+
+  const qtext = document.createElement('div');
+  qtext.className = 'q-text';
+  qtext.textContent = item.q;
+  card.appendChild(qtext);
+
+  const optsWrap = document.createElement('div');
+  optsWrap.className = 'opts';
+
+  item.opts.forEach((optText, oi) => {
+    const label = document.createElement('label');
+    label.className = 'opt';
+    label.innerHTML =
+      '<input type="radio" name="q' + qi + '" value="' + oi + '">' +
+      '<span>' + optText + '</span>';
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      answers[qi] = oi;
+      optsWrap.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      label.classList.add('selected');
+      updateProgress();
+    });
+    optsWrap.appendChild(label);
+  });
+
+  card.appendChild(optsWrap);
+  form.appendChild(card);
+});
+
+function updateProgress(){
+  const answered = answers.filter(a => a !== null).length;
+  progressFill.style.width = (answered / QUESTIONS.length * 100) + '%';
+  submitBtn.disabled = answered < QUESTIONS.length;
+  document.getElementById('warnText').style.display =
+    (answered < QUESTIONS.length) ? 'none' : 'none';
+}
+
+submitBtn.addEventListener('click', () => {
+  const answered = answers.filter(a => a !== null).length;
+  if (answered < QUESTIONS.length){
+    document.getElementById('warnText').style.display = 'block';
+    return;
+  }
+  let score = 0;
+  QUESTIONS.forEach((item, qi) => {
+    if (answers[qi] === item.correct) score++;
+  });
+
+  const resultBox = document.getElementById('result');
+  const scoreNum = document.getElementById('scoreNum');
+  const badge = document.getElementById('scoreBadge');
+  const msg = document.getElementById('scoreMsg');
+
+  scoreNum.textContent = score + '/15';
+
+  let band, badgeClass, message;
+  if (score <= 5){
+    band = 'Začetnik';
+    badgeClass = 'b1';
+    message = 'Začetnik – priporočamo osnovni tečaj samoobrambe, kjer boste spoznali temelje osebne varnosti.';
+  } else if (score <= 10){
+    band = 'Osnovno znanje';
+    badgeClass = 'b2';
+    message = 'Dobro osnovno znanje, vendar ga je treba nadgraditi. Razmislite o udeležbi na naslednjem usposabljanju.';
+  } else if (score <= 13){
+    band = 'Zelo dobro znanje';
+    badgeClass = 'b3';
+    message = 'Zelo dobro znanje! Osnove osebne varnosti dobro poznate.';
+  } else {
+    band = 'Odlično';
+    badgeClass = 'b4';
+    message = 'Odlično! Imaš nadpovprečno razumevanje osnov osebne varnosti.';
+  }
+
+  badge.textContent = band;
+  badge.className = 'badge ' + badgeClass;
+  msg.textContent = message;
+
+  resultBox.style.display = 'block';
+  submitBtn.parentElement.style.display = 'none';
+  resultBox.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('retryBtn').addEventListener('click', () => {
+  location.reload();
+});
+</script>
+</body>
+</html>
