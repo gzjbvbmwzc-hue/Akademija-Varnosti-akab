@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varnost otrok pred neznanci | Akademija varnosti AKAB</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #fdfbf7;
+    --bg-card: #ffffff;
+    --ink: #1c1a17;
+    --muted: #5a544c;
+    --crimson: #9a1b2f;
+    --crimson-dark: #6e1220;
+    --gold: #b8923c;
+    --gold-light: #e8d9ae;
+    --border: #e6ded0;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Barlow', sans-serif;
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--crimson-dark), var(--crimson));
+    padding: 48px 20px 40px;
+    text-align: center;
+    color: #fff;
+  }
+
+  header .eyebrow {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+
+  header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 5vw, 40px);
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  header p.lead {
+    max-width: 640px;
+    margin: 18px auto 0;
+    color: #f1e6e6;
+    font-size: 16px;
+  }
+
+  main {
+    max-width: 760px;
+    margin: -28px auto 60px;
+    padding: 0 20px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px clamp(20px, 5vw, 44px);
+    box-shadow: 0 12px 30px rgba(30,20,10,0.08);
+  }
+
+  .card + .card { margin-top: 24px; }
+
+  .intro {
+    font-size: 17px;
+    color: var(--ink);
+  }
+
+  .intro strong { color: var(--crimson); }
+
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 21px;
+    color: var(--crimson-dark);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+    margin: 0 0 20px;
+  }
+
+  ul.trick-list, ul.strategy-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul.trick-list li, ul.strategy-list li {
+    position: relative;
+    padding: 12px 0 12px 34px;
+    border-bottom: 1px dashed var(--border);
+    font-size: 15.5px;
+  }
+
+  ul.trick-list li:last-child, ul.strategy-list li:last-child {
+    border-bottom: none;
+  }
+
+  ul.trick-list li::before {
+    content: "⚠";
+    position: absolute;
+    left: 0;
+    top: 11px;
+    color: var(--crimson);
+    font-size: 15px;
+  }
+
+  ul.strategy-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .callout {
+    margin-top: 28px;
+    background: #fbf3e4;
+    border-left: 4px solid var(--gold);
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px 20px 50px;
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+
+  footer .brand {
+    font-family: 'Oswald', sans-serif;
+    color: var(--crimson-dark);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--crimson);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Gradivo · Osebna varnost</div>
+  <h1>11. Varnost otrok pred neznanci</h1>
+  <p class="lead">Kako prepoznati vzorce manipulacije, ki jih storilci uporabljajo proti otrokom, in kako otroke naučiti pravilnega odziva.</p>
+</header>
+
+<main>
+
+  <div class="card">
+    <p class="intro">Storilci, ki ciljajo na otroke, uporabljajo predvidljive vzorce manipulacije, ki izkoriščajo čustva, radovednost in zaupanje. <strong>Pomembno je vedeti, da je storilec pogosto oseba, ki jo otrok (ali družina) že pozna.</strong></p>
+  </div>
+
+  <div class="card">
+    <h2>11.1 Deset pogostih trikov za pridobivanje zaupanja otrok</h2>
+    <ul class="trick-list">
+      <li>Iskanje izgubljenega hišnega ljubljenčka.</li>
+      <li>Ponujanje sladkarij ali drugih daril.</li>
+      <li>Lažno predstavljanje kot policist ali druga avtoriteta.</li>
+      <li>Zgodba o družinski nujnosti (npr. "tvoj starš je poškodovan").</li>
+      <li>Ponujena pomoč pri nošenju stvari ali prevoz.</li>
+      <li>Pretvarjanje, da pozna otroka ali družino.</li>
+      <li>Uporaba živali za pritegnitev pozornosti.</li>
+      <li>Ponujanje denarja ali daril.</li>
+      <li>Spraševanje po smeri, da se približa otroku.</li>
+      <li>Manipulacija prek spleta in družbenih omrežij.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>11.2 Ključne strategije, ki naj se jih naučijo otroci</h2>
+    <ul class="strategy-list">
+      <li>Vzdrževanje varne razdalje od neznancev in zaupanje lastnemu občutku nelagodja.</li>
+      <li>Glasno opozarjanje okolice ("Ti nisi moj oče/mama!").</li>
+      <li>Poznavanje "varnih pristanov" (sosed, trgovina, gasilska/policijska postaja).</li>
+      <li>Ostati na varnem mestu, dokler ne prispe zaupanja vreden odrasel.</li>
+      <li>Dogovorjena družinska "koda" za preverjanje istovetnosti osebe, ki trdi, da jo je poslal starš.</li>
+      <li>Osnovno znanje klica v sili.</li>
+      <li>Ostajanje v skupini na izletih in obveščanje odraslih ob oddaljitvi.</li>
+      <li>Ob poskusu prijema fizičen, glasen odpor (brcanje, praskanje, kričanje) — t. i. metoda "jezne mačke".</li>
+      <li>Nikoli ne dovoliti odhoda na drugo (sekundarno) lokacijo — tveganje se tam praviloma bistveno poveča.</li>
+    </ul>
+
+    <div class="callout">
+      Nasvet za starše: te strategije vadite z otrokom skozi igro vlog, ne le kot teoretična navodila. Ponavljanje v varnem okolju ustvari refleks, ki šteje v realni situaciji.
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="brand">AKADEMIJA VARNOSTI AKAB</div>
+  <div>Aleš Boncelj · 33 let policijskih izkušenj · 25 let inštruktorskega dela</div>
+  <a class="back-link" href="https://akademija-varnosti.si">← Nazaj na akademija-varnosti.si</a>
+</footer>
+
+</body>
+</html>
