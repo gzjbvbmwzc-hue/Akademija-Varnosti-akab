@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kviz: Osnove samoobrambe | AKAB</title>
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg2:#151515;
+    --card:#1b1b1b;
+    --crimson:#a10f1f;
+    --crimson-dark:#6e0a15;
+    --gold:#d4af37;
+    --text:#eee8dc;
+    --muted:#a89f91;
+    --good:#3a7d44;
+    --bad:#a10f1f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:radial-gradient(circle at top, var(--bg2), var(--bg));
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:24px 14px 60px;
+  }
+  .wrap{width:100%;max-width:640px;}
+  header{text-align:center;margin-bottom:22px;}
+  header .eyebrow{
+    letter-spacing:3px;
+    font-size:12px;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  header h1{
+    margin:0;
+    font-size:26px;
+    color:#fff;
+    border-bottom:2px solid var(--crimson);
+    display:inline-block;
+    padding-bottom:8px;
+  }
+  .progress-bar{
+    height:6px;
+    background:#2a2a2a;
+    border-radius:4px;
+    overflow:hidden;
+    margin:18px 0;
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--crimson-dark), var(--crimson));
+    width:0%;
+    transition:width .3s ease;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid #2c2c2c;
+    border-radius:10px;
+    padding:24px 20px;
+    box-shadow:0 8px 24px rgba(0,0,0,.4);
+  }
+  .qcount{color:var(--gold);font-size:13px;letter-spacing:1px;margin-bottom:10px;}
+  .question{font-size:19px;line-height:1.4;margin-bottom:18px;color:#fff;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    background:#101010;
+    border:1px solid #333;
+    color:var(--text);
+    padding:13px 14px;
+    border-radius:8px;
+    text-align:left;
+    font-size:15px;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--gold);}
+  .opt.correct{background:rgba(58,125,68,.25);border-color:var(--good);}
+  .opt.wrong{background:rgba(161,15,31,.25);border-color:var(--bad);}
+  .opt:disabled{cursor:default;}
+  .explain{
+    margin-top:16px;
+    padding:14px;
+    border-left:3px solid var(--gold);
+    background:#141414;
+    font-size:14px;
+    line-height:1.5;
+    color:var(--muted);
+    display:none;
+  }
+  .explain b{color:var(--gold);}
+  .nextbtn{
+    margin-top:18px;
+    width:100%;
+    padding:13px;
+    background:var(--crimson);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:.5px;
+    cursor:pointer;
+    display:none;
+  }
+  .nextbtn:hover{background:var(--crimson-dark);}
+  .result{text-align:center;}
+  .result .score{
+    font-size:52px;
+    color:var(--gold);
+    font-weight:700;
+    margin:10px 0 4px;
+  }
+  .result .band{
+    font-size:20px;
+    color:#fff;
+    margin-bottom:14px;
+  }
+  .result p{color:var(--muted);font-size:14px;line-height:1.6;}
+  .restart{
+    margin-top:16px;
+    padding:12px 22px;
+    background:transparent;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+  }
+  .restart:hover{background:var(--gold);color:#111;}
+  footer{
+    margin-top:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    color:var(--muted);
+    font-size:13px;
+  }
+  .logo{
+    width:34px;height:34px;border-radius:50%;
+    background:#0a0a0a;
+    border:2px solid var(--crimson);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--crimson);font-weight:800;font-size:13px;
+  }
+  .disclaimer{
+    text-align:center;font-size:12px;color:#655e54;margin-top:10px;line-height:1.5;
+  }
+  .lock-card{
+    background:var(--card);
+    border:1px solid #2c2c2c;
+    border-radius:10px;
+    padding:32px 24px;
+    text-align:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.4);
+  }
+  .lock-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:#0a0a0a;border:2px solid var(--crimson);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 16px;font-size:24px;color:var(--gold);
+  }
+  .lock-card h2{margin:0 0 10px;color:#fff;font-size:20px;}
+  .lock-card p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:6px;}
+  .price{
+    display:inline-block;margin:14px 0 20px;
+    color:var(--gold);font-size:22px;font-weight:700;
+    border:1px solid var(--gold);border-radius:8px;padding:6px 18px;
+  }
+  .code-row{display:flex;gap:8px;margin-top:6px;}
+  .code-row input{
+    flex:1;padding:12px 14px;border-radius:8px;
+    border:1px solid #333;background:#101010;color:var(--text);font-size:15px;
+  }
+  .code-row input:focus{outline:none;border-color:var(--gold);}
+  .unlockbtn{
+    padding:12px 20px;background:var(--crimson);color:#fff;border:none;
+    border-radius:8px;font-weight:600;cursor:pointer;font-size:15px;
+  }
+  .unlockbtn:hover{background:var(--crimson-dark);}
+  .lock-error{color:var(--bad);font-size:13px;margin-top:10px;display:none;}
+  .buy-note{margin-top:18px;font-size:12px;color:#655e54;}
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Akademija varnosti Aleš Boncelj</div>
+    <h1>Kviz: Osnove samoobrambe</h1>
+  </header>
+
+  <div class="lock-card" id="lockCard">
+    <div class="lock-icon">&#128274;</div>
+    <h2>Kviz: Osnove samoobrambe</h2>
+    <p>20 vprašanj o psihologiji napada, ciljnih točkah, sorazmernosti sile in obrambnih tehnikah, preverjenih z mednarodnimi viri.</p>
+    <div class="price">4,99&nbsp;€</div>
+    <p>Vnesi dostopno kodo, ki si jo prejel/-a ob nakupu.</p>
+    <div class="code-row">
+      <input type="text" id="accessCode" placeholder="Dostopna koda">
+      <button class="unlockbtn" id="unlockBtn">Odkleni</button>
+    </div>
+    <div class="lock-error" id="lockError">Napačna koda. Poskusi znova ali preveri svoje potrdilo o nakupu.</div>
+    <div class="buy-note">Kode še nimaš? Kviz kupiš na akademija-varnosti.si/kvizi ali te kontaktiraj AKAB.</div>
+  </div>
+
+  <div class="progress-bar hidden" id="progressBarWrap"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="card hidden" id="quizCard">
+    <div class="qcount" id="qcount"></div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="explain" id="explain"></div>
+    <button class="nextbtn" id="nextBtn">Naslednje vprašanje</button>
+  </div>
+
+  <footer>
+    <div class="logo">A</div>
+    <span>Akademija varnosti Aleš Boncelj</span>
+  </footer>
+  <div class="disclaimer">Kviz je informativne narave in ne nadomešča praktičnega treninga samoobrambe pod vodstvom inštruktorja.</div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Kaj se v telesu najprej zgodi, ko smo nenadoma napadeni?",
+    options: [
+      "Srčni utrip se dvigne tudi do okoli 200 utripov/min, dihanje se pospeši in pojavi se tunelski vid",
+      "Telo se popolnoma sprosti, da lahko bolje razmišljamo",
+      "Izgubimo sluh, vid pa se izostri v širino",
+      "Ne pride do nobenih telesnih sprememb"
+    ],
+    correct: 0,
+    explain: "Pod stresom napada se sproži izrazit fiziološki odziv: pospešen srčni utrip, hitrejše dihanje, tresenje rok in tunelski vid. To je normalen proces, ki ga z rednim treningom lahko omilimo."
+  },
+  {
+    q: "Kaj se zgodi s finomotoriko (npr. natančni gibi prstov) pod stresom napada?",
+    options: [
+      "Se izboljša, ker adrenalin izostri gibe",
+      "Se znatno poslabša, saj gre za usklajevanje majhnih mišičnih skupin, ki jih pod stresom nadomesti groba motorika",
+      "Ostane popolnoma nespremenjena",
+      "Ni povezave med stresom in motoriko"
+    ],
+    correct: 1,
+    explain: "Fina motorika (koordinacija majhnih mišic, npr. prstov) je prva, ki pod stresom odpove. Zato se v samoobrambi zanašamo na grobo motoriko in preproste, naravne gibe (umik, tek, sunek)."
+  },
+  {
+    q: "Kolikšen delež ljudi po izkušnjah iz treninga pod hudim stresom doseže kritično telesno reakcijo (tresenje, otrplost ipd.), če se ne urijo v realni samoobrambi?",
+    options: [
+      "Približno 10 %",
+      "Približno 50 %",
+      "Približno 98 %",
+      "Manj kot 5 %"
+    ],
+    correct: 2,
+    explain: "Ko gre vse narobe, po teh izkušnjah tudi do 98 % ljudi doseže kritično stresno reakcijo telesa. Z realnim treningom samoobrambe to reakcijo lahko omilimo in ohranimo sposobnost ukrepanja."
+  },
+  {
+    q: "Zakaj se v konfliktni situaciji ne smemo obnašati kot žrtev (npr. prositi ali se opravičevati)?",
+    options: [
+      "Ker to napadalca dodatno razjezi",
+      "Ker s tem takoj delujemo kot nebogljena žrtev, kar je natanko to, kar napadalec išče",
+      "Ker je to nevljudno do okolice",
+      "Ni pomembno, kako se odzovemo"
+    ],
+    correct: 1,
+    explain: "Odločnost je ključna: glasno postavljena meja (\"NE\", \"PUSTI ME PRI MIRU\") deluje odvračalno, prošnje in opravičevanje pa nas takoj postavijo v vlogo nemočne žrtve."
+  },
+  {
+    q: "Kako se po navadi začne večina napadov?",
+    options: [
+      "Neposredno s fizičnim udarcem, brez opozorila",
+      "Z verbalno komunikacijo in konfliktom (žalitve, zbadanje, provokacije)",
+      "Vedno z uporabo orožja",
+      "Napadalec se najprej opraviči"
+    ],
+    correct: 1,
+    explain: "Večina napadov se začne verbalno – z žalitvami, ironičnimi pripombami ali provokacijami. Prepoznavanje te faze omogoča zgodnjo reakcijo, še preden pride do fizičnega stika."
+  },
+  {
+    q: "Kakšna je priporočena drža rok, ko nekdo vstopa v naš osebni prostor (t. i. \"ograja\")?",
+    options: [
+      "Roke sklenjene za hrbtom",
+      "Roke v žepih, sproščeno",
+      "Roke pred seboj, dlani obrnjene proti napadalcu v višini prsi ali vratu",
+      "Roke prekrižane na prsih"
+    ],
+    correct: 2,
+    explain: "Dlani pred seboj v višini prsi/vratu ustvarijo psihološko in fizično \"ograjo\", ki brani osebni prostor, hkrati pa so roke v idealnem položaju za obrambo, če pride do fizičnega stika."
+  },
+  {
+    q: "Kateri predeli telesa napadalca so najprimernejša tarča pri obrambnem udarcu?",
+    options: [
+      "Rame in nadlakti",
+      "Nos, oči, grlo, pleksus, genitalije",
+      "Hrbet in lopatice",
+      "Podlakti"
+    ],
+    correct: 1,
+    explain: "Cilj je vedno nezaščiten in občutljiv predel telesa – nos, oči, grlo, pleksus, genitalije – ker tam z najmanj moči dosežemo največji učinek in si s tem omogočimo umik."
+  },
+  {
+    q: "Kaj naj bo končni cilj obrambnega ukrepanja v napadu?",
+    options: [
+      "Premagati napadalca za vsako ceno",
+      "Kar najhitreje se odmakniti oz. umakniti se z lokacije",
+      "Dokazati svojo moč",
+      "Poklicati čim več mimoidočih na pomoč in počakati"
+    ],
+    correct: 1,
+    explain: "Samoobramba ni tekmovanje – njen namen je omogočiti čim hitrejši umik z ogrožene lokacije, ne pa \"zmaga\" v spopadu."
+  },
+  {
+    q: "Kaj drži glede razmerja med športnimi borilnimi veščinami in realno samoobrambo?",
+    options: [
+      "Trening borilnih veščin te avtomatično pripravi tudi na realno samoobrambo",
+      "Napadi na cesti potekajo po enakih pravilih kot tekmovanja",
+      "Realni napadi so nepredvidljivi, brez pravil, napadalci pa imajo lahko tudi orožje",
+      "Med tekmovanjem in ulično samoobrambo ni razlike"
+    ],
+    correct: 2,
+    explain: "Borilne veščine gradijo koristne temelje, a pri realnem napadu ni pravil in \"fair\" igre – napadalci so nepredvidljivi in imajo lahko orožje, kar zahteva drugačen pristop."
+  },
+  {
+    q: "Katera od naštetih NI ena od vrst nasilja, kot jih navaja gradivo?",
+    options: [
+      "Institucionalno nasilje",
+      "Ekonomsko nasilje",
+      "Naravno nasilje",
+      "Vandalizem"
+    ],
+    correct: 2,
+    explain: "Gradivo med vrstami nasilja navaja psihično, verbalno, ekonomsko, spolno, vandalizem, institucionalno in fizično nasilje – \"naravnega nasilja\" med njimi ni."
+  },
+  {
+    q: "Kaj razlikuje horizontalno od vertikalne verbalne zlorabe?",
+    options: [
+      "Horizontalna poteka med enakovrednima sodelavcema, vertikalna pomeni neprimerno uporabo moči nad podrejenim",
+      "Horizontalna je vedno hujša oblika",
+      "Vertikalna se dogaja izključno v družini",
+      "Med njima ni nobene razlike"
+    ],
+    correct: 0,
+    explain: "Horizontalna zloraba je zloraba med enakovrednima osebama (npr. sodelavcema), vertikalna pa predstavlja zlorabo moči nadrejenega nad podrejenim."
+  },
+  {
+    q: "Znana raziskava iz leta 1981 (Grayson & Stein) je pokazala, da kriminalci izbirajo potencialne žrtve predvsem na podlagi:",
+    options: [
+      "Oblačil in znamke torbice",
+      "Neverbalne komunikacije – drže telesa in načina hoje",
+      "Izključno finančnega videza osebe",
+      "Popolnoma naključno, brez vzorca"
+    ],
+    correct: 1,
+    explain: "V raziskavi so obsojeni storilci nasilnih kaznivih dejanj iz posnetkov mimoidočih dosledno izbirali osebe z neusklajeno, negotovo hojo in sključeno držo – torej so se ravnali po neverbalnih signalih telesa, ne po zunanjih znakih, kot so obleka ali spol."
+  },
+  {
+    q: "Kateri od naštetih znakov NI del t. i. \"telesnega profila žrtve\", kot ga opisuje gradivo?",
+    options: [
+      "Sključena drža in pogled uprt v tla",
+      "Vzravnana hoja z odločnim, mirnim pogledom",
+      "Plitko dihanje in privzdignjena ramena",
+      "Izogibanje očesnemu stiku"
+    ],
+    correct: 1,
+    explain: "Vzravnana hoja in odločen pogled sta ravno nasprotje profila potencialne žrtve – tovrstna telesna govorica kriminalca odvrne, medtem ko sključenost, uklonjen pogled in plitko dihanje delujejo kot vabilo."
+  },
+  {
+    q: "Kaj v samoobrambi pomeni načelo sorazmernosti pri uporabi sile?",
+    options: [
+      "Vedno takoj uporabimo najhujše razpoložljivo sredstvo",
+      "Uporabimo sredstvo z najmanj škodljivimi posledicami; hujše sredstvo šele, če milejše ni uspešno ali mogoče",
+      "Sorazmernost v samoobrambi ni pomembna",
+      "Vedno se odzovemo z enako silo, kot jo uporabi napadalec, ne glede na okoliščine"
+    ],
+    correct: 1,
+    explain: "Sorazmernost pomeni najprej poseči po sredstvu z najmanjšimi škodljivimi posledicami; šele če to ni uspešno ali mogoče zaradi okoliščin in ogrožene varnosti, je upravičena uporaba hujšega sredstva."
+  },
+  {
+    q: "Katere od naštetih okoliščin so \"subjektivne\" – torej imamo nanje vpliv?",
+    options: [
+      "Čas napada",
+      "Število napadalcev",
+      "Naš trening, oprema, usposobljenost in izkušnje",
+      "Kraj napada"
+    ],
+    correct: 2,
+    explain: "Objektivne okoliščine (čas, kraj, število napadalcev) so tiste, na katere nimamo vpliva. Subjektivne so tiste, ki jih lahko sami krepimo – predvsem trening, oprema in izkušnje."
+  },
+  {
+    q: "Kaj pomeni napotek \"izhod je vedno pri palcu\" pri obrambi pred prijemom za zapestje?",
+    options: [
+      "Da moramo napadalca najprej udariti po palcu",
+      "Da je stisk pesti najšibkejši prav pri napadalčevem palcu, zato se skozenj izvijemo iz oprijema",
+      "Da je palec najmočnejši del roke in ga zato ne smemo uporabljati",
+      "Nima posebnega tehničnega pomena"
+    ],
+    correct: 1,
+    explain: "Oprijem roke je najšibkejši na mestu, kjer se stikata palec in preostali prsti, zato se iz vsakega prijema za zapestje izvijemo skozi to točko – smer izhoda je vedno proti napadalčevemu palcu."
+  },
+  {
+    q: "Kako gradivo primerja udarec z odprto dlanjo v nos in udarec s pestjo s strani?",
+    options: [
+      "Udarec z odprto dlanjo je manj boleč in manj učinkovit",
+      "Udarec z odprto dlanjo je bolj boleč in učinkovitejši",
+      "Oba udarca imata enak učinek",
+      "Nobeden od njiju ni priporočljiv"
+    ],
+    correct: 1,
+    explain: "Po gradivu je udarec z odprto dlanjo v nos bolj boleč kot bočni udarec s pestjo, kar ga naredi za učinkovito in dostopno obrambno orodje tudi za netrenirane osebe."
+  },
+  {
+    q: "Kakšen je namen glasnega kričanja med napadom?",
+    options: [
+      "Samo kot klic na pomoč mimoidočim",
+      "Povzroči senzorično preobremenitev napadalčevih možganov in ga lahko presenetljivo prestraši ter prepreči hujši napad",
+      "Nima nobenega dejanskega učinka na napadalca",
+      "Kaže na strah in šibkost, zato se odsvetuje"
+    ],
+    correct: 1,
+    explain: "Nenadno glasno kričanje deluje kot senzorična preobremenitev, ki lahko napadalca presenetljivo prestraši in prepreči, da bi napad eskaliral."
+  },
+  {
+    q: "Kaj v gradivu opisujejo t. i. \"strokovni pritiski\" (metoda Kyusho-jitsu)?",
+    options: [
+      "Udarce s polno silo v mišično maso",
+      "Pritiske na živčne točke, ki začasno zmanjšajo nasprotnikovo sposobnost upiranja",
+      "Metanje nasprotnika na tla",
+      "Uporabo pripomočkov, kot je dežnik"
+    ],
+    correct: 1,
+    explain: "S pritiski na točno določena mesta živcev (Kyusho-jitsu) začasno porušimo nasprotnikovo energetsko ravnovesje in zmanjšamo njegovo sposobnost upiranja, kar olajša izvedbo prijema."
+  },
+  {
+    q: "Kaj od naštetega ustreza definiciji \"napada\", kot jo navaja gradivo?",
+    options: [
+      "Vsaka nezakonita neposredna aktivnost osebe s telesno silo, orožjem, orodjem, predmetom, snovjo ali živaljo, s katero nas želi poškodovati ali ogroziti",
+      "Vsak fizični stik med dvema osebama, ne glede na namen",
+      "Le uporaba strelnega orožja",
+      "Le fizični obračun med dvema ali več osebami na dogovorjenem mestu"
+    ],
+    correct: 0,
+    explain: "Napad je vsaka nezakonita neposredna aktivnost s telesno silo, orožjem, orodjem, predmetom, snovjo ali celo živaljo, katere namen je poškodovati, vzeti življenje ali ogroziti nas ali drugo osebo."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const qcountEl = document.getElementById('qcount');
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const explainEl = document.getElementById('explain');
+const nextBtn = document.getElementById('nextBtn');
+const progressFill = document.getElementById('progressFill');
+const quizCard = document.getElementById('quizCard');
+
+function loadQuestion(){
+  answered = false;
+  explainEl.style.display = 'none';
+  nextBtn.style.display = 'none';
+  const item = questions[current];
+  qcountEl.textContent = `Vprašanje ${current+1} / ${questions.length}`;
+  questionEl.textContent = item.q;
+  optionsEl.innerHTML = '';
+  progressFill.style.width = ((current)/questions.length*100)+'%';
+
+  item.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => selectAnswer(idx));
+    optionsEl.appendChild(btn);
+  });
+}
+
+function selectAnswer(idx){
+  if(answered) return;
+  answered = true;
+  const item = questions[current];
+  const buttons = optionsEl.querySelectorAll('.opt');
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if(i === item.correct) b.classList.add('correct');
+    else if(i === idx) b.classList.add('wrong');
+  });
+  if(idx === item.correct) score++;
+  explainEl.innerHTML = (idx === item.correct ? '<b>Pravilno.</b> ' : '<b>Napačno.</b> ') + item.explain;
+  explainEl.style.display = 'block';
+  nextBtn.style.display = 'block';
+  nextBtn.textContent = (current === questions.length - 1) ? 'Poglej rezultat' : 'Naslednje vprašanje';
+}
+
+nextBtn.addEventListener('click', () => {
+  current++;
+  if(current < questions.length){
+    loadQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function getBand(pct){
+  if(pct <= 7) return {label:'Začetnik', text:'Osnove samoobrambe ti še niso domače. Priporočamo, da se udeležiš tečaja pri AKAB, kjer boste sistematično predelali odzive na stres, verbalno postavljanje meja in osnovne obrambne tehnike.'};
+  if(pct <= 13) return {label:'Dobro osnovno znanje', text:'Poznaš temeljna načela, a jih je vredno utrditi s praktičnim treningom, da postanejo samodejna reakcija tudi pod stresom.'};
+  if(pct <= 17) return {label:'Zelo dobro znanje', text:'Odlično razumeš teoretična izhodišča samoobrambe. Z rednim praktičnim treningom lahko to znanje pretvoriš v hitro in zanesljivo reakcijo.'};
+  return {label:'Odlično', text:'Izjemno poznavanje snovi! Tvoje razumevanje psihologije napada, sorazmernosti sile in tehnik obrambe je na visoki ravni.'};
+}
+
+function showResult(){
+  progressFill.style.width = '100%';
+  const band = getBand(score);
+  quizCard.innerHTML = `
+    <div class="result">
+      <div class="qcount">REZULTAT</div>
+      <div class="score">${score} / ${questions.length}</div>
+      <div class="band">${band.label}</div>
+      <p>${band.text}</p>
+      <button class="restart" id="restartBtn">Ponovi kviz</button>
+    </div>
+  `;
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    current = 0; score = 0;
+    quizCard.innerHTML = `
+      <div class="qcount" id="qcount"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="explain" id="explain"></div>
+      <button class="nextbtn" id="nextBtn">Naslednje vprašanje</button>
+    `;
+    rebindAndStart();
+  });
+}
+
+function rebindAndStart(){
+  window.qcountEl = document.getElementById('qcount');
+  window.questionEl = document.getElementById('question');
+  window.optionsEl = document.getElementById('options');
+  window.explainEl = document.getElementById('explain');
+  window.nextBtn = document.getElementById('nextBtn');
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    current++;
+    if(current < questions.length){ loadQuestionGlobal(); } else { showResult(); }
+  });
+  loadQuestionGlobal();
+}
+
+function loadQuestionGlobal(){
+  answered = false;
+  const qc = document.getElementById('qcount');
+  const qe = document.getElementById('question');
+  const oe = document.getElementById('options');
+  const ee = document.getElementById('explain');
+  const nb = document.getElementById('nextBtn');
+  ee.style.display = 'none';
+  nb.style.display = 'none';
+  const item = questions[current];
+  qc.textContent = `Vprašanje ${current+1} / ${questions.length}`;
+  qe.textContent = item.q;
+  oe.innerHTML = '';
+  progressFill.style.width = ((current)/questions.length*100)+'%';
+  item.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => selectAnswerGlobal(idx));
+    oe.appendChild(btn);
+  });
+}
+
+function selectAnswerGlobal(idx){
+  if(answered) return;
+  answered = true;
+  const item = questions[current];
+  const oe = document.getElementById('options');
+  const ee = document.getElementById('explain');
+  const nb = document.getElementById('nextBtn');
+  const buttons = oe.querySelectorAll('.opt');
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if(i === item.correct) b.classList.add('correct');
+    else if(i === idx) b.classList.add('wrong');
+  });
+  if(idx === item.correct) score++;
+  ee.innerHTML = (idx === item.correct ? '<b>Pravilno.</b> ' : '<b>Napačno.</b> ') + item.explain;
+  ee.style.display = 'block';
+  nb.style.display = 'block';
+  nb.textContent = (current === questions.length - 1) ? 'Poglej rezultat' : 'Naslednje vprašanje';
+}
+
+// --- Dostopna koda / paywall ---
+// Sem dodaj veljavne dostopne kode (male/velike črke niso pomembne).
+const validCodes = ["AKAB-SAMOOBRAMBA-2026"];
+
+const lockCard = document.getElementById('lockCard');
+const progressBarWrap = document.getElementById('progressBarWrap');
+const accessCodeInput = document.getElementById('accessCode');
+const unlockBtn = document.getElementById('unlockBtn');
+const lockError = document.getElementById('lockError');
+
+function tryUnlock(){
+  const entered = accessCodeInput.value.trim().toUpperCase();
+  if(validCodes.map(c => c.toUpperCase()).includes(entered)){
+    localStorage.setItem('akab_samoobramba_unlocked', '1');
+    unlockQuiz();
+  } else {
+    lockError.style.display = 'block';
+  }
+}
+
+function unlockQuiz(){
+  lockCard.classList.add('hidden');
+  progressBarWrap.classList.remove('hidden');
+  quizCard.classList.remove('hidden');
+  loadQuestion();
+}
+
+unlockBtn.addEventListener('click', tryUnlock);
+accessCodeInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') tryUnlock(); });
+
+if(localStorage.getItem('akab_samoobramba_unlocked') === '1'){
+  unlockQuiz();
+}
+</script>
+</body>
+</html>
