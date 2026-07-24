@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#F7F3E9">
+<title>Zaščita osebnega prostora — Akademija Varnosti Aleš Boncelj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F3E9; --bg-alt:#EFE7D4; --card:#FFFFFF;
+    --red:#C81E24; --red-deep:#7A1013; --gold:#8C5A0F;
+    --paper:#1A1710; --muted:#514A3C; --line:#C9BB98; --on-red:#FFFFFF;
+  }
+  html{color-scheme:light;}
+  *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--paper);font-family:'Barlow',sans-serif;font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Anton',sans-serif;text-transform:uppercase;font-weight:400;letter-spacing:0.01em;margin:0;line-height:1.05;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 28px;}
+
+  header.site{position:sticky;top:0;z-index:50;background:rgba(247,243,233,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;max-width:1180px;margin:0 auto;gap:16px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-text{display:flex;flex-direction:column;line-height:1.1;}
+  .brand-text b{font-family:'Anton',sans-serif;font-size:14.5px;letter-spacing:0.02em;}
+  .brand-text span{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--muted);letter-spacing:0.07em;}
+  nav.links{display:flex;gap:22px;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;font-family:'IBM Plex Mono',monospace;}
+  nav.links a{color:var(--muted);border-bottom:1px solid transparent;padding-bottom:4px;white-space:nowrap;}
+  nav.links a:hover{color:var(--paper);border-color:var(--red);}
+  .cta-btn{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;background:var(--red);color:var(--on-red);padding:10px 16px;border:1px solid var(--red);}
+  @media (max-width:900px){ nav.links{display:none;} }
+
+  .hero{padding:48px 0 24px;}
+  .hero .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:14px;}
+  .hero h1{font-size:38px;color:var(--red-deep);margin-bottom:10px;}
+  .hero p.lead{font-size:17px;color:var(--muted);font-style:italic;max-width:640px;}
+
+  article{padding-bottom:60px;}
+  article h2{font-size:22px;color:var(--red-deep);margin:36px 0 14px;border-bottom:2px solid var(--line);padding-bottom:8px;}
+  article h3{font-size:16.5px;color:var(--gold);margin:22px 0 10px;text-transform:none;letter-spacing:0;font-family:'Barlow',sans-serif;font-weight:700;}
+  article p{margin:0 0 14px;color:var(--paper);}
+  article ul{margin:0 0 14px;padding-left:22px;}
+  article li{margin-bottom:8px;}
+  .callout{background:var(--bg-alt);border-left:4px solid var(--gold);padding:16px 18px;margin:20px 0;font-weight:600;}
+  .callout.alert{border-left-color:var(--red);}
+  .example{padding:10px 14px;margin-bottom:8px;border-radius:6px;font-size:15px;}
+  .example.ok{background:#E4EFE1;border-left:4px solid #2E7D32;}
+  .example.warn{background:#F6E9D9;border-left:4px solid var(--gold);}
+  .note{margin-top:40px;padding:16px 18px;border:1px solid var(--line);background:var(--card);font-size:14px;color:var(--muted);}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;}
+  .footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-inner">
+    <a href="index.html" style="text-decoration:none;"><div class="brand">
+      <div class="brand-text"><b>AKADEMIJA VARNOSTI</b><span>ALEŠ BONCELJ S.P. · AKAB</span></div>
+    </div></a>
+    <nav class="links">
+      <a href="index.html#zakaj-zdaj">Zakaj zdaj</a>
+      <a href="o-meni.html">O meni</a>
+      <a href="storitve.html">Storitve</a>
+      <a href="za-koga.html">Za koga</a>
+      <a href="gradiva.html">Gradiva</a>
+      <a href="kvizi.html">Kvizi</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a href="kontakt.html" class="cta-btn">Povpraševanje</a>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:18px;">
+  <a href="gradiva.html" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.05em;">← Nazaj na gradiva</a>
+</div>
+
+<div class="wrap hero">
+  <span class="tag">GRADIVO // OSEBNA VARNOST</span>
+  <h1>Zaščita osebnega prostora</h1>
+  <p class="lead">Osebni prostor ni le vprašanje bontona – je nevrofiziološki alarmni sistem, ki nas opozarja na potencialno grožnjo, še preden jo zavestno prepoznamo.</p>
+</div>
+
+<div class="wrap">
+<article>
+
+  <h2>Lastnosti osebnega prostora</h2>
+  <h3>1. Meje osebnega prostora</h3>
+  <ul>
+    <li>So nevidne, a jih ljudje močno zaznavamo. Ko nekdo prestopi te meje, lahko občutimo nelagodje, tesnobo ali celo agresijo – gre za avtomatski, nezavedni odziv živčnega sistema, ne za pretiravanje.</li>
+    <li>Velikost osebnega prostora se razlikuje glede na kulturo, okolje, odnos med ljudmi in situacijo (stres, utrujenost in pretekle izkušnje z nasiljem območje dodatno povečajo).</li>
+  </ul>
+  <h3>2. Območja osebnega prostora</h3>
+  <ul>
+    <li><strong>Intimni prostor (0–50 cm):</strong> rezerviran za partnerja, družinske člane in zelo bližnje prijatelje.</li>
+    <li><strong>Osebni prostor (50 cm–1,2 m):</strong> za prijatelje, znance ali kolege, s katerimi imamo dober odnos.</li>
+    <li><strong>Družbeni prostor (1,2 m–3 m):</strong> za formalne interakcije, npr. z neznanci, sodelavci ali na sestankih.</li>
+    <li><strong>Javni prostor (nad 3 m):</strong> za govore, predstavitve ali dogodke, kjer ne pričakujemo osebne bližine.</li>
+  </ul>
+  <p>Ta območja izvirajo iz proksemike (E. T. Hall) in so orientacijska, ne strogo merjena – v praksi je pomembnejši občutek nadzora nad razdaljo kot centimeter natančno.</p>
+
+  <h2>Zakaj je osebni prostor pomemben</h2>
+  <ul>
+    <li><strong>Psihološka varnost:</strong> ohranjanje razdalje nam daje občutek nadzora in časa za odziv, kar neposredno zmanjšuje raven stresa.</li>
+    <li><strong>Spoštovanje intime:</strong> neželena bližina lahko deluje kot vdor v osebnostno avtonomijo.</li>
+    <li><strong>Komunikacija:</strong> pravilna razdalja v interakciji olajša sporazumevanje in preprečuje konflikte.</li>
+    <li><strong>Kulturne razlike:</strong> v nekaterih kulturah je osebni prostor manjši (npr. v Južni Ameriki), v drugih večji (npr. na severu Evrope).</li>
+  </ul>
+
+  <h2>Kršitev osebnega prostora</h2>
+  <p>Ko nekdo prestopi meje osebnega prostora brez dovoljenja, lahko to povzroči:</p>
+  <ul>
+    <li>Nelagodje, jezo ali stres.</li>
+    <li>Obrambno držo ali umik.</li>
+    <li>Eskalacijo konflikta, če oseba situacijo doživi kot grožnjo.</li>
+  </ul>
+
+  <h2>Kako spoštovati osebni prostor drugih</h2>
+  <ul>
+    <li>Opazujte govorico telesa: če se oseba umakne, to pomeni, da se ne počuti udobno.</li>
+    <li>Vprašajte za dovoljenje: preden se preveč približate, npr. za objem ali fizični dotik.</li>
+    <li>Prilagodite razdaljo situaciji: v formalnih okoljih ohranite večjo razdaljo, kot bi jo v neformalnih.</li>
+  </ul>
+
+  <div class="callout">OSEBNI PROSTOR JE OSNOVNA ČLOVEŠKA POTREBA, KI IGRA KLJUČNO VLOGO PRI OHRANJANJU PSIHOLOŠKE IN FIZIČNE VARNOSTI TER OMOGOČA SPOŠTOVANJE MEDOSEBNIH MEJA.</div>
+
+  <p>Kadar konfliktna ali agresivna oseba vstopi v vaš osebni prostor in se zaradi strahu odzovete z odrivanjem, udarcem ali brcanjem, je ključno razumeti fiziologijo odziva, pravne meje samoobrambe in kako ravnati z minimalno potrebno mero sile.</p>
+
+  <h3>Razumevanje vašega odziva</h3>
+  <ul>
+    <li>Naravna reakcija: fizični odziv, kot je odrivanje ali udarec, je naraven, ko zaznamo neposredno grožnjo. Gre za avtonomni obrambni mehanizem telesa (t. i. odziv "boj, beg ali zamrznitev").</li>
+    <li>Samoobramba: uporaba sile za zaščito sebe je dovoljena, vendar mora izpolnjevati zakonske pogoje silobrana – biti mora nujna in sorazmerna s stopnjo grožnje.</li>
+  </ul>
+
+  <h2>Kaj pomeni sorazmerna samoobramba (silobran)</h2>
+  <p>Pravna podlaga: silobran ureja 22. člen Kazenskega zakonika (KZ-1). Prvi odstavek določa, da dejanje, storjeno v silobranu, ni protipravno. Drugi odstavek silobran opredeljuje kot obrambo, ki je nujno potrebna, da nekdo od sebe ali druge osebe odvrne sočasen (istočasen) in protipraven napad.</p>
+  <p>Iz te opredelitve izhajata dva pogoja, ki morata biti izpolnjena hkrati:</p>
+  <ul>
+    <li><strong>Sočasnost napada:</strong> obramba je zakonita le, dokler napad traja. Preventivno ukrepanje pred začetkom napada ali "obračun" po tem, ko je nevarnost že minila, nista silobran.</li>
+    <li><strong>Nujnost in sorazmernost:</strong> uporabljena sila mora biti tista, ki je resnično potrebna za odvrnitev napada, in ne sme očitno presegati teže in intenzivnosti grožnje.</li>
+  </ul>
+
+  <h2>Praktični nasveti za reakcijo</h2>
+  <ul>
+    <li><strong>Umik kot prva možnost:</strong> če je le mogoče, se umaknite ali ustvarite večji fizični prostor med vama. Uporabite močan, odločen glas: "Umakni se!" ali "Nehaj se približevati!"</li>
+    <li><strong>Fizična samoobramba (kot zadnja možnost):</strong> uporabite hitro, kratko silo za ustvarjanje prostora, sorazmerno vrsti in intenzivnosti napada.</li>
+    <li><strong>Po konfliktu:</strong> takoj poiščite pomoč in obvestite varnostno službo ali policijo.</li>
+  </ul>
+
+  <h2>Kako ravnati v prihodnje</h2>
+  <h3>Ohranite mirnost in samozavest</h3>
+  <ul>
+    <li>Globoko vdihnite: poskusite se pomiriti, hkrati imejte samozavestno držo.</li>
+    <li>Ne odzivajte se impulzivno: nenadni premiki ali dvigovanje glasu lahko osebo dodatno izzovejo.</li>
+  </ul>
+  <h3>Jasno izrazite meje</h3>
+  <ul>
+    <li>Verbalen poziv: "Prosim, stopi korak nazaj" (razdalja 1,5–2 m) ali "Potrebujem več prostora, prosim".</li>
+    <li>Govorica telesa: zadržite obrambno držo (roke pred sabo) in jasno pokažite, da ne želite bližine.</li>
+  </ul>
+  <h3>Uporabite opozorilne fraze, če situacija eskalira</h3>
+  <ul>
+    <li>"Resno mislim – stopi korak nazaj." / "Če se ne umakneš, bom prosil za pomoč."</li>
+    <li>S svojim tonom pokažite resnost, a brez kričanja.</li>
+  </ul>
+
+  <h2>Še nekaj nasvetov</h2>
+  <ul>
+    <li>Vzdržujte dostop do izhoda: vedno imejte v mislih, kako hitro zapustiti situacijo, če postane nevarna.</li>
+    <li>Ohranite prostor za manevriranje: izogibajte se tesnim ali zaprtim prostorom.</li>
+    <li>Opazujte okolico: prepoznajte predmete, ki jih lahko uporabite za obrambo (npr. stol, torba, telefon).</li>
+  </ul>
+
+  <h2>Silobran – primeri</h2>
+  <h3>1. Fizični napad s pestmi</h3>
+  <div class="example ok">✓ Če se umakneš ali z rokami odbiješ udarce, je to zakonita obramba.</div>
+  <div class="example ok">✓ Če ga enkrat ali dvakrat udariš nazaj, da ustaviš napad, je to praviloma sorazmerno.</div>
+  <div class="example warn">⚠ Če ga onesposobiš s pretirano silo, ko se že umika, gre za prekoračen silobran.</div>
+
+  <h3>2. Napad z nožem</h3>
+  <div class="example ok">✓ Če ga odrineš, pobegneš ali blokiraš napad, je to zakonit silobran.</div>
+  <div class="example ok">✓ Če mu izbiješ nož in ga podreš na tla, je to praviloma še vedno sorazmerno.</div>
+  <div class="example warn">⚠ Če po tem, ko mu vzameš nož, nadaljuješ s prekomerno silo, gre za prekoračitev silobrana.</div>
+
+  <h3>3. Napad v lastnem domu</h3>
+  <div class="example ok">✓ Ob resnični in neposredni nevarnosti (napadalec je npr. oborožen) je uporaba sile, sorazmerne stopnji ogroženosti, zakonit silobran.</div>
+  <div class="example warn">⚠ Če vlomilec zbeži ali je onesposobljen, ga ne smeš dodatno napasti iz maščevanja.</div>
+
+  <h2>Prekoračen silobran</h2>
+  <p>Ko oseba v obrambi prestopi meje sorazmernosti, pravna teorija in sodna praksa govorita o t. i. kvantitativnem ekscesu: izpolnjeni so sicer vsi znaki silobrana, vendar je obrambna reakcija presegla potrebno intenzivnost odvračanja napada.</p>
+  <p>Tretji odstavek 22. člena KZ-1 sodišču omogoča dvoje: storilca, ki je prekoračil meje silobrana, kaznuje mileje, ali mu kazen v celoti odpusti, če je do prekoračitve prišlo zaradi močne razdraženosti ali prestrašenosti, ki jo je povzročil sam napad.</p>
+
+  <div class="callout alert">PRAVICA: Zavedajte se, da imate pravico do varnosti in spoštovanja vašega osebnega prostora. Če oseba noče upoštevati vaših prošenj, je njeno vedenje nespoštljivo ali celo agresivno, in imate pravico ukrepati za zaščito sebe – v mejah, ki jih določa zakon.</div>
+
+  <div class="note">Gradivo je pripravljeno v izobraževalne namene na podlagi 22. člena Kazenskega zakonika (KZ-1) in ne predstavlja pravnega nasveta. Sodišče vsak primer silobrana presoja posamično, glede na vse okoliščine konkretnega dogodka.<br><br>Želiš preveriti svoje znanje? <a href="kvizi.html" style="color:var(--red-deep);font-weight:700;">Reši kviz Zaščita osebnega prostora →</a></div>
+
+</article>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>AKADEMIJA VARNOSTI ALEŠ BONCELJ S.P.</span>
+    <span>Prepoznaj — Ukrepaj — Preživi</span>
+    <span>akademija.varnosti@gmail.com</span>
+    <span>© 2026 AKAB</span>
+  </div>
+</footer>
+
+</body>
+</html>
