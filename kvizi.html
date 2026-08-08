@@ -179,6 +179,21 @@
   .quiz-cta{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--red);text-transform:uppercase;letter-spacing:0.05em;}
   .quiz-card-soon{opacity:0.55;}
 
+  /* bundle promo */
+  .bundle-card{position:relative;background:linear-gradient(135deg,#1A1710 0%,#2A241A 100%);color:var(--bg);border:2px solid var(--red);padding:26px 26px;margin-bottom:22px;overflow:hidden;}
+  .bundle-card .ribbon{position:absolute;top:14px;right:-34px;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 40px;transform:rotate(40deg);}
+  .bundle-card .tag2{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#D9A441;border:1px solid #D9A441;padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:14px;}
+  .bundle-card h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:24px;color:var(--bg);margin:0 0 10px;line-height:1.1;}
+  .bundle-card .includes{list-style:none;padding:0;margin:14px 0 18px;font-family:'Barlow',sans-serif;font-size:14.5px;}
+  .bundle-card .includes li{padding:5px 0 5px 24px;position:relative;color:#E7E0CE;}
+  .bundle-card .includes li::before{content:"✓";position:absolute;left:0;color:#4CAF50;font-weight:700;}
+  .bundle-card .price-row{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
+  .bundle-card .price-old{font-family:'IBM Plex Mono',monospace;font-size:15px;color:#9C917A;text-decoration:line-through;}
+  .bundle-card .price-new{font-family:'Anton',sans-serif;font-size:30px;color:#D9A441;}
+  .bundle-card .save{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#4CAF50;text-transform:uppercase;letter-spacing:0.05em;}
+  .bundle-card .buy-btn{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:0.05em;background:var(--red);color:#fff;padding:12px 24px;border:1px solid var(--red);font-weight:700;}
+  .bundle-card .buy-btn:hover{background:var(--red-deep);border-color:var(--red-deep);}
+
   /* zakaj zdaj */
   .why-now{background:var(--bg-alt);}
   .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
@@ -245,6 +260,22 @@
       <div><span class="tag">Preveri znanje</span><h2>Kvizi</h2></div>
       <div class="meta">Kratki kvizi za utrjevanje znanja s področja varnosti.</div>
     </div>
+    <div class="bundle-card reveal">
+      <span class="ribbon">PRIHRANI</span>
+      <span class="tag2">OMEJENA PONUDBA // PAKET</span>
+      <h3>Paket 3 kvizov — vse znanje na enem mestu</h3>
+      <ul class="includes">
+        <li>AMOK – šole in zdravstvene ustanove (20 vprašanj)</li>
+        <li>Zaščita osebnega prostora (18 vprašanj)</li>
+        <li>Osnove samoobrambe (20 vprašanj)</li>
+      </ul>
+      <div class="price-row">
+        <span class="price-old">14,97 €</span>
+        <span class="price-new">9,99 €</span>
+        <span class="save">Prihranek 33 %</span>
+      </div>
+      <a href="https://akab30.gumroad.com/l/reimob" target="_blank" rel="noopener" class="buy-btn">Kupi paket →</a>
+    </div>
     <div class="quiz-grid">
       <a href="kviz-amok-splosno.html" class="quiz-card reveal">
         <div class="quiz-card-top">
@@ -261,7 +292,7 @@
           <span class="quiz-price">4,99 €</span>
         </div>
         <h3>Zaščita osebnega prostora</h3>
-        <p>20 vprašanj o mejah osebnega prostora, silobranu in sorazmerni samoobrambi po slovenski zakonodaji.</p>
+        <p>18 vprašanj o mejah osebnega prostora, silobranu in sorazmerni samoobrambi po slovenski zakonodaji in sodni praksi.</p>
         <span class="quiz-cta">Reši kviz →</span>
       </a>
       <a href="kviz-samoobramba-osnove.html" class="quiz-card reveal">
